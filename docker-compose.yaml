@@ -1,0 +1,25 @@
+version: '3'
+services: 
+
+ flask-app:
+  image: kproject:1
+  restart: always
+  ports:
+   - "9000:5000"
+  networks:
+    - projectnetwork
+    
+ mysql:
+  image: mysql:5.7.21
+  volumes:
+    - ./mysql/var/lib/mysql/:/var/lib/mysql/
+  restart: always
+  ports:
+   - "3306:3306"
+  networks:
+   - projectnetwork
+  env_file:
+   - ./mysql.env   
+      
+networks:
+  projectnetwork:
